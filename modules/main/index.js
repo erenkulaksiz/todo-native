@@ -1,13 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import Api from '../../classes/api.js';
-
+import Api from '../classes/api.js';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeartbeat, faCheckCircle, faLightbulb } from '@fortawesome/free-solid-svg-icons';
-
 import Todo from '../screens/todo';
 import Later from '../screens/later';
 import Done from '../screens/done';
@@ -16,12 +11,20 @@ const Tab = createBottomTabNavigator();
 
 class Main extends React.Component {
 
-    _refresh() {
-        this.props.dispatch({ type: 'SET_LOADING', payload: true })
-        Api.refreshTodoList()
+    constructor(props) {
+        super(props)
+        this.state = {
+            tasks: [],
+            loading: true,
+        }
+    }
+
+    async _refresh() {
+        this.setState({ ...this.state, loading: true });
+        await Api.refreshTodoList()
             .then((res) => {
-                this.props.dispatch({ type: 'SET_TASKS', payload: res.data });
-                this.props.dispatch({ type: 'SET_LOADING', payload: false })
+                console.log("@refresh");
+                this.setState({ ...this.state, loading: false, tasks: res });
             })
             .catch((error) => {
                 console.error(error);
@@ -30,27 +33,27 @@ class Main extends React.Component {
 
     componentDidMount() {
         this._refresh();
-
     }
 
     render() {
+
         return (
             <Tab.Navigator>
-                <Tab.Screen name="Todo" component={Todo}
+                <Tab.Screen name="Todo" children={() => <Todo state={this.state} />}
                     options={{
                         tabBarLabel: 'Todo',
                         tabBarIcon: ({ color, size }) => (
                             <FontAwesomeIcon icon={faHeartbeat} size={size} color={color} />
                         ),
                     }} />
-                <Tab.Screen name="Later" component={Later}
+                <Tab.Screen name="Later" children={() => <Later state={this.state} />}
                     options={{
                         tabBarLabel: 'Later',
                         tabBarIcon: ({ color, size }) => (
                             <FontAwesomeIcon icon={faCheckCircle} size={size} color={color} />
                         ),
                     }} />
-                <Tab.Screen name="Done" component={Done}
+                <Tab.Screen name="Done" children={() => <Done state={this.state} />}
                     options={{
                         tabBarLabel: 'Done',
                         tabBarIcon: ({ color, size }) => (
@@ -62,9 +65,4 @@ class Main extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    const { reducer } = state
-    return { reducer }
-};
-
-export default connect(mapStateToProps)(Main);
+export default Main;

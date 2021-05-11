@@ -11,6 +11,12 @@ class Api extends React.Component {
     async refreshTodoList() {
 
         return axios.get(this.apiRoute)
+            .then(res => {
+                return res.data;
+            })
+            .catch(err => {
+                throw err;
+            })
     }
 }
 const api = new Api();
