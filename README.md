@@ -10,20 +10,14 @@
 
 <br/>
 
-Run
+# Installatation
 
 <br/>
 
 git clone https://github.com/erenkulaksiz/todonative.git
 
-<br/>
-
 cd todonative
 
-<br/>
-
 npm i
-
-<br/>
 
 react-native run-android
