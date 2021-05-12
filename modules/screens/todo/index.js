@@ -126,7 +126,8 @@ class Todo extends React.Component {
                     isVisible={this.state.modal.visible}
                     onSwipeComplete={() => _hideModal()}
                     swipeDirection={['down']}
-                    style={style.modalWrapper}>
+                    style={style.modalWrapper}
+                    onBackdropPress={() => _hideModal()}>
                     <View style={style.modal}>
                         <Text style={style.modalTitle}>
                             <FontAwesomeIcon icon={faEdit} size={18} color={"#000"} /> Edit Task
