@@ -3,8 +3,6 @@ import { StyleSheet, Platform } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        marginBottom: 12,
-        padding: 12,
     },
     modalWrapper: {
         justifyContent: "flex-end",

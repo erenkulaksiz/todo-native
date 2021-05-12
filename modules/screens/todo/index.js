@@ -66,7 +66,6 @@ class Todo extends React.Component {
             onRefresh,
         } = this.props
 
-
         const _showModal = (taskId, index) => {
             this.setState({
                 ...this.state,
@@ -117,7 +116,7 @@ class Todo extends React.Component {
                     textContent={'Loading...'} />
 
                 <PTRView onRefresh={() => { refresh() }} >
-                    <ScrollView>
+                    <ScrollView style={{ padding: 12 }}>
                         {taskList.length > 0 ? taskList : <Text style={style.tip}>You can add tasks from right bottom.</Text>}
                     </ScrollView>
                 </PTRView>

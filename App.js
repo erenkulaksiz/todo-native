@@ -12,9 +12,9 @@ class App extends React.Component {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            headerShown: false,
+            headerShown: true,
           }}>
-          <Stack.Screen name="TabStack" component={Main} />
+          <Stack.Screen name="TabStack" component={Main} options={{ title: 'TODO App' }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
