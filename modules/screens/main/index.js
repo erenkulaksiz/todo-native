@@ -14,7 +14,6 @@ class Main extends React.Component {
         this.state = {
             tasks: [],
             loading: true,
-            taskAdded: false,
         }
     }
 
@@ -76,7 +75,6 @@ class Main extends React.Component {
                 onDeleteTask={(taskId, index) => this._deleteTask(taskId, index)}
                 onAddTask={(screenCallback) => { this._addTask(screenCallback) }}
                 onEditTask={(taskCallback) => { this._updateTask(taskCallback) }}
-                onRefresh={() => this._refresh()}
             />
         );
     }
