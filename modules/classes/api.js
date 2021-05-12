@@ -9,10 +9,57 @@ class Api extends React.Component {
     }
 
     async refreshTodoList() {
-
         return axios.get(this.apiRoute)
             .then(res => {
                 return res.data;
+            })
+            .catch(err => {
+                throw err;
+            })
+    }
+
+    async deleteTask(taskId, index) {
+        return axios.delete(this.apiRoute + taskId)
+            .then(res => {
+                const data = res.data;
+                return data;
+            })
+            .catch(err => {
+                throw err;
+            })
+    }
+
+    async addTask(taskTarget) {
+
+        const newTask = {
+            taskName: "New Task",
+            taskDesc: "Description (Optional)",
+            taskTarget: taskTarget
+        }
+
+        return axios.post(this.apiRoute, newTask)
+            .then(res => {
+                const data = res.data;
+                return data;
+            })
+            .catch(err => {
+                throw err;
+            })
+    }
+
+    async updateTask(task) {
+
+        const taskTemp = {
+            taskName: task.taskName,
+            taskDesc: task.taskDesc,
+            id: task.taskId,
+            taskTarget: task.taskTarget,
+        }
+
+        return axios.put(this.apiRoute + taskTemp.id, taskTemp)
+            .then(res => {
+                const data = res.data;
+                return data;
             })
             .catch(err => {
                 throw err;

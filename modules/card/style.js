@@ -4,10 +4,12 @@ export default StyleSheet.create({
     container: {
         width: "100%",
         backgroundColor: "#fff",
-        elevation: 4,
-        borderRadius: 4,
+        borderRadius: 8,
         marginBottom: 12,
         padding: 12,
+        borderStyle: "solid",
+        borderWidth: 2,
+        borderColor: "#dbdbdb",
     },
     cardTitle: {
         fontSize: 21,

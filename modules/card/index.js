@@ -13,7 +13,7 @@ class Card extends React.Component {
         } = this.props
 
         return (
-            <TouchableOpacity onPress={onClick} style={style.container}>
+            <TouchableOpacity onPress={() => { onClick(task); }} style={style.container}>
                 <Text style={style.cardTitle}>{task.taskName}</Text>
                 <Text style={style.cardDesc}>{task.taskDesc}</Text>
             </TouchableOpacity>
